@@ -12,7 +12,6 @@ Gem::Specification.new do |spec|
   spec.license       = 'MIT'
   spec.files         = Dir['lib/**/*.rb']
   spec.require_paths = ['lib']
-  spec.version       = 0.0.1
 
   spec.add_dependency 'json'
 end
