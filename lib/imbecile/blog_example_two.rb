@@ -3,6 +3,10 @@ module Imbecile
 
     attr_reader :data_from_external_api
 
+    def initialize(args)
+      @data_from_external_api = args.fetch(:data_from_external_api)
+    end
+
     def build_data_for_songs_api
       data_from_external_api.map { |raw_data| build_from(raw_data) }
     end
