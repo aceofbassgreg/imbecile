@@ -47,9 +47,10 @@ module Imbecile
           end
 
           arr << data_to_post
-        end
-      end
-    end
+        
+        end #:each block
+      end #tap
+    end #:build_data_from_songs_api
 
     def build_from(raw_data)
       data_to_post = {
@@ -83,6 +84,8 @@ module Imbecile
           data_to_post[:theme] = "General"
         end
       end
+
+      data_to_post
     end
 
     def profanities?(lyrics)
@@ -92,99 +95,99 @@ module Imbecile
   end
 end
 
-module Imbecile
-  class Song
+# module Imbecile
+#   class Song
 
-    ProfanitiesRegex = /(badword)/
+#     ProfanitiesRegex = /(badword)/
 
-    attr_reader :raw_data, :tags, :genre, :lyrics, :title, :type
+#     attr_reader :raw_data, :tags, :genre, :lyrics, :title, :type
 
-    def initialize(raw_data)
-      @raw_data = raw_data
-      @tags     = raw_data.fetch(:tags,[])
-      @genre    = raw_data.fetch(:genre,nil)
-      @lyrics   = raw_data.fetch(:lyrics)
-      @title    = raw_data.fetch(:title)
-      @type     = raw_data.fetch(:type)
-    end
+#     def initialize(raw_data)
+#       @raw_data = raw_data
+#       @tags     = raw_data.fetch(:tags,[])
+#       @genre    = raw_data.fetch(:genre,nil)
+#       @lyrics   = raw_data.fetch(:lyrics)
+#       @title    = raw_data.fetch(:title)
+#       @type     = raw_data.fetch(:type)
+#     end
 
-    def self.build(raw_data)
-      b = self.create_instance(raw_data)
-      b.build_post
-    end
+#     def self.build(raw_data)
+#       b = self.create_instance(raw_data)
+#       b.build_post
+#     end
 
-    def profanities?
-      !!lyrics[ProfanitiesRegex]
-    end
+#     def profanities?
+#       !!lyrics[ProfanitiesRegex]
+#     end
 
-    def build_post
-      {
-        title: title.gsub(/[^A-Za-z ]/," "),
-        content_type: type,
-        languages: ["English"],
-        lyrics: lyrics,
-        nsfw: profanities?,
-        tags: assign_tags,
-        theme: assign_theme
-      }
-    end
+#     def build_post
+#       {
+#         title: title.gsub(/[^A-Za-z ]/," "),
+#         content_type: type,
+#         languages: ["English"],
+#         lyrics: lyrics,
+#         nsfw: profanities?,
+#         tags: assign_tags,
+#         theme: assign_theme
+#       }
+#     end
 
-    private
+#     private
 
 
-      def assign_tags
-        raise NotImplementedError
-      end
+#       def assign_tags
+#         raise NotImplementedError
+#       end
 
-      def assign_theme
-        raise NotImplementedError
-      end
-  end
-end
+#       def assign_theme
+#         raise NotImplementedError
+#       end
+#   end
+# end
 
-class IndieSong < Imbecile::Song
-  def self.create_instance(raw_data)
-    IndieSong.new(raw_data)
-  end
+# class IndieSong < Imbecile::Song
+#   def self.create_instance(raw_data)
+#     IndieSong.new(raw_data)
+#   end
 
-  def assign_tags
-    tags.empty? ? ["DIY","cost-cutting","home project"] : tags
-  end
+#   def assign_tags
+#     tags.empty? ? ["DIY","cost-cutting","home project"] : tags
+#   end
 
-  def assign_theme
-    genre
-  end
-end
+#   def assign_theme
+#     genre
+#   end
+# end
 
-class BlackMetalSong < Imbecile::Song
-  def self.create_instance(raw_data)
-    BlackMetalSong.new(raw_data)
-  end
+# class BlackMetalSong < Imbecile::Song
+#   def self.create_instance(raw_data)
+#     BlackMetalSong.new(raw_data)
+#   end
 
-  def assign_tags
-    if tags.empty? 
-      raise NoBlackMetalTagsException
-    else
-      tags
-    end
-  end
+#   def assign_tags
+#     if tags.empty? 
+#       raise NoBlackMetalTagsException
+#     else
+#       tags
+#     end
+#   end
 
-  def assign_theme
-    genre + " Subgenre"
-  end
-end
+#   def assign_theme
+#     genre + " Subgenre"
+#   end
+# end
 
-class GeneralSong < Imbecile::Song
-  def self.create_instance(raw_data)
-    GeneralSong.new(raw_data)
-  end
+# class GeneralSong < Imbecile::Song
+#   def self.create_instance(raw_data)
+#     GeneralSong.new(raw_data)
+#   end
 
-  def assign_tags
-    tags
-  end
+#   def assign_tags
+#     tags
+#   end
 
-  def assign_theme
-    tags.count == 1 ? tags.first : "General"
-  end
+#   def assign_theme
+#     tags.count == 1 ? tags.first : "General"
+#   end
 
-end
+# end
