@@ -41,7 +41,7 @@ module Imbecile
     end
 
     def self.build(raw_data)
-      b = self.create_instance(raw_data)
+      b = self.new(raw_data)
       b.build_post
     end
 
@@ -75,9 +75,6 @@ module Imbecile
 end
 
 class IndieSong < Imbecile::Song
-  def self.create_instance(raw_data)
-    IndieSong.new(raw_data)
-  end
 
   def assign_tags
     tags.empty? ? ["DIY","cost-cutting","home project"] : tags
@@ -89,9 +86,6 @@ class IndieSong < Imbecile::Song
 end
 
 class BlackMetalSong < Imbecile::Song
-  def self.create_instance(raw_data)
-    BlackMetalSong.new(raw_data)
-  end
 
   def assign_tags
     if tags.empty? 
@@ -107,9 +101,6 @@ class BlackMetalSong < Imbecile::Song
 end
 
 class GeneralSong < Imbecile::Song
-  def self.create_instance(raw_data)
-    GeneralSong.new(raw_data)
-  end
 
   def assign_tags
     tags
