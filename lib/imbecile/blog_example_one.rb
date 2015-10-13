@@ -13,7 +13,6 @@ module Imbecile
       [].tap do |arr|
 
         data_from_external_api.each do |raw_data|
-          # build_from(raw_data)
           data_to_post = {
                    title: raw_data[:title].gsub(/[^A-Za-z ]/," "),
                    content_type: raw_data[:type],
