@@ -148,7 +148,7 @@ end
 # class IndieSong < Imbecile::Song
 
 #   def assign_tags
-#     tags.empty? ? ["DIY","cost-cutting","home project"] : tags
+#     tags.empty? ? ["Indie", "Small Label", "Pitchfork-approved"] : tags
 #   end
 
 #   def assign_theme

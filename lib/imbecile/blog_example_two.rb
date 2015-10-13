@@ -1,5 +1,5 @@
 module Imbecile 
-  class PolymorphicPayloadBuilder
+  class TemplatePayloadBuilder
 
     attr_reader :data_from_external_api
 
@@ -25,7 +25,7 @@ module Imbecile
 end
 
 module Imbecile
-  class SongBuilder
+  class AbstractSongBuilder
 
     ProfanitiesRegex = /(badword)/
 
@@ -74,10 +74,10 @@ module Imbecile
   end
 end
 
-class IndieSongBuilder < Imbecile::SongBuilder
+class IndieSongBuilder < Imbecile::AbstractSongBuilder
 
   def assign_tags
-    tags.empty? ? ["DIY","cost-cutting","home project"] : tags
+    tags.empty? ? ["Indie", "Small Label", "Pitchfork-approved"] : tags
   end
 
   def assign_theme
@@ -85,7 +85,7 @@ class IndieSongBuilder < Imbecile::SongBuilder
   end
 end
 
-class BlackMetalSongBuilder < Imbecile::SongBuilder
+class BlackMetalSongBuilder < Imbecile::AbstractSongBuilder
 
   def assign_tags
     if tags.empty? 
@@ -100,7 +100,7 @@ class BlackMetalSongBuilder < Imbecile::SongBuilder
   end
 end
 
-class GeneralSongBuilder < Imbecile::SongBuilder
+class GeneralSongBuilder < Imbecile::AbstractSongBuilder
 
   def assign_tags
     tags

@@ -1,10 +1,10 @@
 require_relative '../test_setup'
-require 'imbecile/blog_example_two'
+require 'imbecile/blog_example_four'
 
-class BlogExampleTwoTests < MiniTest::Test
+class BlogExampleFourTests < MiniTest::Test
 
   def setup
-    @builder = Imbecile::TemplatePayloadBuilder.new(
+    @builder = Imbecile::SimplePayloadBuilder.new(
                           data_from_external_api: SAMPLE_DATA
                           )
   end
