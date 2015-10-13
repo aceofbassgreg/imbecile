@@ -17,7 +17,7 @@ module Imbecile
         subject = raw_data[:genre].gsub(/[^A-Za-z]/,"")
         klass = Object.const_get(subject + "SongBuilder")
         klass.build(raw_data)
-      rescue
+      rescue NameError
         GeneralSongBuilder.build(raw_data)
       end
     end
