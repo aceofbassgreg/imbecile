@@ -4,7 +4,7 @@ require 'imbecile/blog_example_two'
 class BlogExampleTwoTests < MiniTest::Test
 
   def setup
-    @builder = Imbecile::PayloadBuilder.new(
+    @builder = Imbecile::PolymorphicPayloadBuilder.new(
                           data_from_external_api: SAMPLE_DATA
                           )
   end

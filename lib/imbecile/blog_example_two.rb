@@ -1,5 +1,5 @@
 module Imbecile 
-  class PayloadBuilder
+  class PolymorphicPayloadBuilder
 
     attr_reader :data_from_external_api
 
