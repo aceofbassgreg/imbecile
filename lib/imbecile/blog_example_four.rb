@@ -61,17 +61,17 @@ module Imbecile
       "General"
     end
 
-    def genre_builder_instance
+    def component_builder_instance
       klass = Object.const_get("#{formatted_genre}ComponentBuilder")
       klass.new(raw_tags: raw_tags, genre: genre)
     end
 
     def build_tags
-      genre_builder_instance.tags
+      component_builder_instance.tags
     end
 
     def build_theme
-      genre_builder_instance.theme
+      component_builder_instance.theme
     end
   end
 end
