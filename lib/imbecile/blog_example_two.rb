@@ -14,18 +14,18 @@ module Imbecile
     def build_from(raw_data)
       case raw_data[:genre]
       when "Indie"
-        IndieSong.build(raw_data)
+        IndieSongBuilder.build(raw_data)
       when "Black Metal"
-        BlackMetalSong.build(raw_data)
+        BlackMetalSongBuilder.build(raw_data)
       else
-        GeneralSong.build(raw_data)
+        GeneralSongBuilder.build(raw_data)
       end
     end
   end
 end
 
 module Imbecile
-  class Song
+  class SongBuilder
 
     ProfanitiesRegex = /(badword)/
 
@@ -74,7 +74,7 @@ module Imbecile
   end
 end
 
-class IndieSong < Imbecile::Song
+class IndieSongBuilder < Imbecile::SongBuilder
 
   def assign_tags
     tags.empty? ? ["DIY","cost-cutting","home project"] : tags
@@ -85,7 +85,7 @@ class IndieSong < Imbecile::Song
   end
 end
 
-class BlackMetalSong < Imbecile::Song
+class BlackMetalSongBuilder < Imbecile::SongBuilder
 
   def assign_tags
     if tags.empty? 
@@ -100,7 +100,7 @@ class BlackMetalSong < Imbecile::Song
   end
 end
 
-class GeneralSong < Imbecile::Song
+class GeneralSongBuilder < Imbecile::SongBuilder
 
   def assign_tags
     tags

@@ -15,10 +15,10 @@ module Imbecile
     def build_from(raw_data)
       begin
         subject = raw_data[:genre].gsub(/[^A-Za-z]/,"")
-        klass = Object.const_get(subject + "Song")
+        klass = Object.const_get(subject + "SongBuilder")
         klass.build(raw_data)
       rescue
-        GeneralSong.build(raw_data)
+        GeneralSongBuilder.build(raw_data)
       end
     end
   end
